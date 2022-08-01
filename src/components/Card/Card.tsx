@@ -1,3 +1,3 @@
-export const Card = () => {
-  return <div></div>;
+export const Card = (props: any) => {
+  return <div {...props}></div>;
 };
