@@ -1,5 +1,10 @@
-import { Routes } from "react-router-dom";
+import { DefaultLayout } from "@/components/Layout";
+import { Route, Routes } from "react-router-dom";
 
 export const AppRoutes = () => {
-  return <Routes></Routes>;
+  return (
+    <Routes>
+      <Route path="/" element={<DefaultLayout />}></Route>
+    </Routes>
+  );
 };
