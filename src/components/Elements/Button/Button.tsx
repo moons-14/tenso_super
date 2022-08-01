@@ -11,7 +11,7 @@ const buttonSizes = {
   lg: "px-6 py-3 text-xl",
 };
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<Partial<ButtonProps>> = ({
   children,
   className,
   shadow = "sm",
