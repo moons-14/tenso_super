@@ -3,7 +3,8 @@ import clsx from "clsx";
 export type ButtonProps = {
   children: React.ReactNode;
   size: "sm" | "md" | "lg";
-  color: "normal" | "primary" | "secondary" | "info" | "warn" | "error";
+  shadow: "none" | "sm" | "md" | "lg";
+  variant: "normal" | "primary" | "secondary" | "info" | "warn" | "error";
 };
 const buttonSizes = {
   sm: "px-2 py-1 text-sm",
@@ -11,7 +12,7 @@ const buttonSizes = {
   lg: "px-6 py-3 text-xl",
 };
 
-const buttonColors = {
+const buttonVariants = {
   normal: "bg-base-100 text-base-content",
   primary: "bg-primary text-primary-content",
   secondary: "bg-secondary text-secondary-content",
@@ -20,17 +21,26 @@ const buttonColors = {
   error: "bg-error text-error-content",
 };
 
+const buttonShadows = {
+  none: "shadow-none",
+  sm: "shadow-sm",
+  md: "shadow-md",
+  lg: "shadow-lg",
+};
+
 export const Button: React.FC<Partial<ButtonProps>> = ({
   children,
+  shadow = "sm",
   size = "md",
-  color = "normal",
+  variant = "normal",
 }) => {
   return (
     <button
       className={clsx(
-        "border-base-content rounded-full border-2 font-bold",
+        "border-base-content rounded-full border-2 font-bold active:shadow-none",
         buttonSizes[size],
-        buttonColors[color]
+        buttonVariants[variant],
+        buttonShadows[shadow]
       )}
     >
       {children}

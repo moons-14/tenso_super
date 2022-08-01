@@ -13,17 +13,36 @@ const Template: ComponentStory<typeof Button> = (args) => (
 export const normal = Template.bind({});
 normal.args = {
   children: "Hello World",
-  color: "normal",
+  shadow: "sm",
+  variant: "normal",
 };
 
 export const primary = Template.bind({});
 primary.args = {
-  children: "Hello World",
-  color: "primary",
+  ...normal.args,
+  variant: "primary",
 };
 
 export const secondary = Template.bind({});
 secondary.args = {
+  ...normal.args,
+  variant: "secondary",
+};
+
+export const info = Template.bind({});
+info.args = {
+  ...normal.args,
+  variant: "info",
+};
+
+export const warn = Template.bind({});
+warn.args = {
+  ...normal.args,
+  variant: "warn",
+};
+
+export const error = Template.bind({});
+error.args = {
   children: "Hello World",
-  color: "secondary",
+  variant: "error",
 };
