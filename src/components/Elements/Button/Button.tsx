@@ -7,7 +7,7 @@ export type ButtonProps = BoxProps & {
 };
 const buttonSizes = {
   sm: "px-2 py-1 text-sm",
-  md: "px-4 py-2 text-normal",
+  md: "px-4 py-1 text-normal",
   lg: "px-6 py-3 text-xl",
 };
 

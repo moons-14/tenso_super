@@ -2,24 +2,23 @@ import clsx from "clsx";
 import { shadows, variants } from "../styles";
 import { BoxProps } from "../types";
 
-export type CardProps = BoxProps;
+export type InputProps = BoxProps & JSX.IntrinsicElements["input"];
 
-export const Card: React.FC<Partial<CardProps>> = ({
-  children,
+export const Input: React.FC<Partial<InputProps>> = ({
   className,
-  shadow = "md",
+  shadow = "sm",
   variant = "normal",
+  ...props
 }) => {
   return (
-    <div
+    <input
       className={clsx(
-        "card border-base-content border-2",
+        "border-base-content rounded-full border-2 px-2 outline-none",
         shadows[shadow],
         variants[variant],
         className
       )}
-    >
-      {children}
-    </div>
+      {...props}
+    />
   );
 };
