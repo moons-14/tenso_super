@@ -1,11 +1,9 @@
 import clsx from "clsx";
 import { shadows, variants } from "../styles";
+import { BoxProps } from "../types";
 
-export type ButtonProps = {
-  children: React.ReactNode;
+export type ButtonProps = BoxProps & {
   size: "sm" | "md" | "lg";
-  shadow: "none" | "sm" | "md" | "lg";
-  variant: "normal" | "primary" | "secondary" | "info" | "warn" | "error";
 };
 const buttonSizes = {
   sm: "px-2 py-1 text-sm",
@@ -13,8 +11,9 @@ const buttonSizes = {
   lg: "px-6 py-3 text-xl",
 };
 
-export const Button: React.FC<Partial<ButtonProps>> = ({
+export const Button: React.FC<ButtonProps> = ({
   children,
+  className,
   shadow = "sm",
   size = "md",
   variant = "normal",
@@ -25,7 +24,8 @@ export const Button: React.FC<Partial<ButtonProps>> = ({
         "border-base-content rounded-full border-2 font-bold active:shadow-none",
         buttonSizes[size],
         variants[variant],
-        shadows[shadow]
+        shadows[shadow],
+        className
       )}
     >
       {children}
