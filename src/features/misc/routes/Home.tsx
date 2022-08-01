@@ -13,7 +13,7 @@ export const Home = () => {
           <Input
             shadow="sm"
             className="h-8 max-w-sm flex-1"
-            placeholder="type space id"
+            placeholder="Type Space Name"
           />
           <Button variant="warn">Connect</Button>
         </div>
