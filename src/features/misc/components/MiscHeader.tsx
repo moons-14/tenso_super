@@ -1,9 +1,8 @@
+import { Button } from "@/components/Elements";
 import { MenuIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
-import { Button } from "../Elements";
 
-export const Header = () => {
-  console.log("Hello");
+export const MiscHeader = () => {
   return (
     <header className="fixed top-0 w-full">
       <nav className="navbar mx-auto max-w-screen-lg justify-between gap-4 sm:px-4">
