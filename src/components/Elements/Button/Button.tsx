@@ -4,6 +4,7 @@ import { BoxProps } from "../types";
 
 export type ButtonProps = BoxProps & {
   size: "sm" | "md" | "lg";
+  rounded: "none" | "md" | "full";
 };
 const buttonSizes = {
   sm: "px-2 py-1 text-sm",

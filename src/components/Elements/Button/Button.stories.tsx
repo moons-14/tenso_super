@@ -13,6 +13,7 @@ const Template: ComponentStory<typeof Button> = (args) => (
 export const normal = Template.bind({});
 normal.args = {
   children: "Hello World",
+  rounded: "full",
   shadow: "sm",
   variant: "normal",
 };
