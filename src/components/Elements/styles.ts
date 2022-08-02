@@ -13,3 +13,9 @@ export const shadows = {
   md: "shadow-md",
   lg: "shadow-lg",
 };
+
+export const roundedList = {
+  none: "rounded-none",
+  md: "rounded-md",
+  full: "rounded-full",
+};
