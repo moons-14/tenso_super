@@ -1,8 +1,8 @@
 import { Button } from "@/components/Elements";
 import { MenuIcon } from "@heroicons/react/outline";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
-export const MiscHeader = () => {
+const Header = () => {
   return (
     <header className="fixed top-0 w-full">
       <nav className="navbar mx-auto max-w-screen-lg justify-between gap-4 sm:px-4">
@@ -14,5 +14,16 @@ export const MiscHeader = () => {
         </Button>
       </nav>
     </header>
+  );
+};
+
+export const MiscLayout = () => {
+  return (
+    <>
+      <Header />
+      <div className="pt-24">
+        <Outlet />
+      </div>
+    </>
   );
 };
