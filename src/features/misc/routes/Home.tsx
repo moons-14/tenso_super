@@ -8,6 +8,7 @@ export const Home = () => {
   const joinSpace = () => {
     spaceId && void navigate(`/space/${spaceId}`);
   };
+
   return (
     <>
       <h1 className="text-center text-3xl">

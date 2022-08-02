@@ -19,6 +19,7 @@ export const spaceStates = atomFamily<Space, string>({
         text: array(string()),
       }),
       read: ({ read }) => read(spaceId),
+      write: ({ write }, newValue) => write(spaceId, newValue),
     }),
   ],
 });

@@ -1,3 +1,4 @@
+import { SyncSpace } from "@/state/space";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { BrowserRouter } from "react-router-dom";
@@ -11,7 +12,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     <RecoilRoot>
       <Suspense fallback={<LoadingFallBack />}>
         <ErrorBoundary FallbackComponent={ErrorFallBack}>
-          <BrowserRouter>{children}</BrowserRouter>
+          <SyncSpace>
+            <BrowserRouter>{children}</BrowserRouter>
+          </SyncSpace>
         </ErrorBoundary>
       </Suspense>
     </RecoilRoot>

@@ -1,7 +1,7 @@
 import { db } from "@/libs/firebase";
-import { useCallback } from "@storybook/addons";
-import { doc, getDoc } from "firebase/firestore";
-import { RecoilSync } from "recoil-sync";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useCallback } from "react";
+import { RecoilSync, WriteInterface } from "recoil-sync";
 
 export const SyncSpace: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -17,8 +17,16 @@ export const SyncSpace: React.FC<{ children: React.ReactNode }> = ({
           }
     );
   }, []);
+
+  const write = useCallback(({ diff }: WriteInterface) => {
+    for (const [key, value] of diff) {
+      const ref = doc(db, "space", key);
+      void setDoc(ref, value);
+    }
+  }, []);
+
   return (
-    <RecoilSync storeKey="space_store" read={read}>
+    <RecoilSync storeKey="space_store" read={read} write={write}>
       {children}
     </RecoilSync>
   );
