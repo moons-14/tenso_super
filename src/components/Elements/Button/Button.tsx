@@ -2,10 +2,11 @@ import clsx from "clsx";
 import { roundedList, shadows, variants } from "../styles";
 import { BoxProps } from "../types";
 
-export type ButtonProps = BoxProps & {
-  size: "sm" | "md" | "lg";
-  rounded: "none" | "md" | "full";
-};
+export type ButtonProps = JSX.IntrinsicElements["button"] &
+  BoxProps & {
+    size: "sm" | "md" | "lg";
+    rounded: "none" | "md" | "full";
+  };
 const buttonSizes = {
   sm: "px-2 py-1 text-sm",
   md: "px-4 py-1 text-normal",
@@ -19,6 +20,7 @@ export const Button: React.FC<Partial<ButtonProps>> = ({
   size = "md",
   rounded = "full",
   variant = "normal",
+  ...props
 }) => {
   return (
     <button
@@ -30,6 +32,7 @@ export const Button: React.FC<Partial<ButtonProps>> = ({
         roundedList[rounded],
         className
       )}
+      {...props}
     >
       {children}
     </button>

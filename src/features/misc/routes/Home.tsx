@@ -1,6 +1,13 @@
 import { Button, Input } from "@/components/Elements";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
+  const navigate = useNavigate();
+  const [spaceId, setSpaceId] = useState("");
+  const joinSpace = () => {
+    spaceId && void navigate(`/space/${spaceId}`);
+  };
   return (
     <>
       <h1 className="text-center text-3xl">
@@ -14,8 +21,12 @@ export const Home = () => {
             shadow="sm"
             className="max-w-sm flex-1 px-4 py-1"
             placeholder="Type Space Name"
+            value={spaceId}
+            onChange={(e) => setSpaceId(e.target.value)}
           />
-          <Button variant="warn">Join</Button>
+          <Button variant="warn" onClick={joinSpace}>
+            Join
+          </Button>
         </div>
         <div className="font-bold">または</div>
         <Button variant="info">Create New Space</Button>
