@@ -10,7 +10,7 @@ export const Header = () => {
         <Link to="/" className="btn btn-ghost text-2xl normal-case">
           すーぱー転送君
         </Link>
-        <Button size="sm" className="block rounded-none">
+        <Button size="sm" rounded="md" className="mr-2 block">
           <MenuIcon className="w-8" />
         </Button>
       </nav>

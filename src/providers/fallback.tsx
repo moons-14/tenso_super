@@ -5,7 +5,7 @@ export const ErrorFallBack = () => {
   const theme = useRecoilValue(themeState);
   return (
     <div
-      className="flex min-h-screen items-center justify-center"
+      className="bg-base-200 flex min-h-screen items-center justify-center"
       data-theme={theme}
     >
       <h2>Some Error Happen!!!</h2>
@@ -17,7 +17,7 @@ export const LoadingFallBack = () => {
   const theme = useRecoilValue(themeState);
   return (
     <div
-      className="flex min-h-screen items-center justify-center"
+      className="bg-base-200 flex min-h-screen items-center justify-center"
       data-theme={theme}
     >
       <div>Loading....</div>

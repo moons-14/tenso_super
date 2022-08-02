@@ -13,7 +13,7 @@ export const Input: React.FC<Partial<InputProps>> = ({
   return (
     <input
       className={clsx(
-        "border-base-content rounded-full border-2 px-4 outline-none",
+        "border-base-content rounded-full border-2 outline-none",
         shadows[shadow],
         variants[variant],
         className

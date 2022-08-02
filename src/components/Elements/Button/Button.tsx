@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { shadows, variants } from "../styles";
+import { roundedList, shadows, variants } from "../styles";
 import { BoxProps } from "../types";
 
 export type ButtonProps = BoxProps & {
@@ -16,15 +16,17 @@ export const Button: React.FC<Partial<ButtonProps>> = ({
   className,
   shadow = "sm",
   size = "md",
+  rounded = "full",
   variant = "normal",
 }) => {
   return (
     <button
       className={clsx(
-        "border-base-content rounded-full border-2 font-bold active:shadow-none",
+        "border-base-content border-2 font-bold active:shadow-none",
         buttonSizes[size],
         variants[variant],
         shadows[shadow],
+        roundedList[rounded],
         className
       )}
     >

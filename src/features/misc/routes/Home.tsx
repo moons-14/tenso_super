@@ -12,13 +12,13 @@ export const Home = () => {
         <div className="flex w-full items-center gap-4">
           <Input
             shadow="sm"
-            className="h-8 max-w-sm flex-1"
+            className="max-w-sm flex-1 px-2 text-lg"
             placeholder="Type Space Name"
           />
-          <Button variant="warn">Connect</Button>
+          <Button variant="warn">Join</Button>
         </div>
         <div className="font-bold">または</div>
-        <Button variant="info">Random Connect</Button>
+        <Button variant="info">Create New Space</Button>
       </div>
     </>
   );
