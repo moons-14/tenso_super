@@ -6,7 +6,7 @@ import { useSpaceId } from "../hooks";
 const Header = () => {
   const spaceId = useSpaceId();
   return (
-    <header className="fixed top-0 w-full">
+    <header className="fixed top-0 z-20 w-full">
       <nav className="navbar mx-auto max-w-screen-lg justify-between gap-4 sm:px-4">
         <Link to="/" className="flex-1">
           <Button size="sm" rounded="md">

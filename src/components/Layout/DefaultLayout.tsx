@@ -15,7 +15,7 @@ export const DefaultLayout = () => {
       <div className="flex-1">
         <Suspense
           fallback={
-            <div className="flex h-full items-center justify-center">
+            <div className="flex h-screen items-center justify-center">
               <Spinner />
             </div>
           }
