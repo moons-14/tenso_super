@@ -1,11 +1,11 @@
 import { Button, Input } from "@/components/Elements";
-import { useState } from "react";
-import { SpaceTextList } from "../components";
+import { ChangeEvent, useState } from "react";
+import { FileCardList, SpaceTextList } from "../components";
 import { useSpace, useSpaceId } from "../hooks";
 
 export const Space = () => {
   const spaceId = useSpaceId();
-  const { addText, space } = useSpace(spaceId);
+  const { addText, addFiles } = useSpace(spaceId);
   const [text, setText] = useState("");
 
   const submitText = (e: React.FormEvent) => {
@@ -14,7 +14,12 @@ export const Space = () => {
     addText(text);
     setText("");
   };
-  console.log(space);
+
+  const handleFiles = ({
+    target: { files },
+  }: ChangeEvent<HTMLInputElement>) => {
+    addFiles(Array.from(files || []));
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -29,10 +34,17 @@ export const Space = () => {
           Submit
         </Button>
       </form>
-      <div className="card border-base-content h-24 w-full border-4 border-dashed">
-        <input type="file" className="h-full w-full" />
+      <div className="card border-base-content relative flex h-24 w-full items-center justify-center border-4 border-dashed">
+        <Button shadow="none">Drop file or click to choose file</Button>
+        <input
+          type="file"
+          multiple
+          className="absolute inset-0 opacity-0"
+          onChange={(e) => void handleFiles(e)}
+        />
       </div>
       <SpaceTextList />
+      <FileCardList />
     </div>
   );
 };
