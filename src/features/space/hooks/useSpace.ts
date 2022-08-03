@@ -4,9 +4,21 @@ import { useRecoilState } from "recoil";
 
 export const useSpace = (spaceId: string) => {
   const [space, setSpace] = useRecoilState(spaceStates(spaceId));
-  const addText = useCallback((newText: string) => {
-    setSpace({ ...space, text: [...space.text, newText] });
-  }, []);
+  const addText = useCallback(
+    (newText: string) => {
+      setSpace({ ...space, text: [...space.text, newText] });
+    },
+    [space, setSpace]
+  );
+  const deleteText = useCallback(
+    (deleteText: string) => {
+      setSpace({
+        ...space,
+        text: space.text.filter((text) => text !== deleteText),
+      });
+    },
+    [space, setSpace]
+  );
 
-  return { space, setSpace, addText };
+  return { space, setSpace, addText, deleteText };
 };

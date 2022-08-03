@@ -26,7 +26,7 @@ export const SpaceLayout = () => {
   return (
     <>
       <Header />
-      <div className="container mx-auto max-w-xl gap-6 px-2 pt-24">
+      <div className="container mx-auto max-w-xl px-2 pt-24">
         <Outlet />
       </div>
     </>

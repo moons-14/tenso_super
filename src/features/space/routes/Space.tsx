@@ -1,5 +1,6 @@
 import { Button, Input } from "@/components/Elements";
 import { useState } from "react";
+import { SpaceTextList } from "../components";
 import { useSpace, useSpaceId } from "../hooks";
 
 export const Space = () => {
@@ -16,7 +17,7 @@ export const Space = () => {
   console.log(space);
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <form className="flex gap-4" onSubmit={submitText}>
         <Input
           className="w-full px-4 text-xl"
@@ -28,6 +29,7 @@ export const Space = () => {
           Submit
         </Button>
       </form>
-    </>
+      <SpaceTextList />
+    </div>
   );
 };
