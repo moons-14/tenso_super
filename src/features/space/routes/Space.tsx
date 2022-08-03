@@ -29,6 +29,9 @@ export const Space = () => {
           Submit
         </Button>
       </form>
+      <div className="card border-base-content h-24 w-full border-4 border-dashed">
+        <input type="file" className="h-full w-full" />
+      </div>
       <SpaceTextList />
     </div>
   );
