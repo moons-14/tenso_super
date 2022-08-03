@@ -1,4 +1,5 @@
 import { Button, Input } from "@/components/Elements";
+import { nanoid } from "nanoid";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +9,9 @@ export const Home = () => {
   const joinSpace = (e: FormEvent) => {
     e.preventDefault();
     spaceId && void navigate(`/space/${spaceId}`);
+  };
+  const joinRandom = () => {
+    void navigate(`/space/${nanoid().slice(0, 10)}`);
   };
 
   return (
@@ -31,7 +35,9 @@ export const Home = () => {
           </Button>
         </form>
         <div className="font-bold">または</div>
-        <Button variant="info">Create New Space</Button>
+        <Button variant="info" onClick={joinRandom}>
+          Create New Space
+        </Button>
       </div>
     </>
   );
