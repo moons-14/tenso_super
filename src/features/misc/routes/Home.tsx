@@ -1,11 +1,12 @@
 import { Button, Input } from "@/components/Elements";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
   const navigate = useNavigate();
   const [spaceId, setSpaceId] = useState("");
-  const joinSpace = () => {
+  const joinSpace = (e: FormEvent) => {
+    e.preventDefault();
     spaceId && void navigate(`/space/${spaceId}`);
   };
 
@@ -17,7 +18,7 @@ export const Home = () => {
         多目的共有サービス
       </h1>
       <div className="mx-6 flex flex-col items-center gap-2 pt-12">
-        <div className="flex w-full items-center gap-4">
+        <form className="flex items-center gap-4" onSubmit={joinSpace}>
           <Input
             shadow="sm"
             className="max-w-sm flex-1 px-4 py-1"
@@ -25,10 +26,10 @@ export const Home = () => {
             value={spaceId}
             onChange={(e) => setSpaceId(e.target.value)}
           />
-          <Button variant="warn" onClick={joinSpace}>
+          <Button type="submit" variant="warn" onClick={joinSpace}>
             Join
           </Button>
-        </div>
+        </form>
         <div className="font-bold">または</div>
         <Button variant="info">Create New Space</Button>
       </div>

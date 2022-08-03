@@ -21,7 +21,7 @@ export const MiscLayout = () => {
   return (
     <>
       <Header />
-      <div className="pt-24">
+      <div className="flex flex-col justify-center pt-24">
         <Outlet />
       </div>
     </>
