@@ -52,19 +52,24 @@ export const SpaceTextList = memo(() => {
   const { space, deleteText } = useSpace(spaceId);
   const tryDeleteText = (text: string) => {
     if (text !== deleting) return setDeleting(text);
+    setDeleting("");
     void deleteText(text);
   };
 
   return (
     <Card className="p-4" shadow="sm">
-      {space.text.map((text) => (
-        <SpaceText
-          key={text}
-          text={text}
-          deleting={deleting === text}
-          deleteText={tryDeleteText}
-        />
-      ))}
+      {space.text.length > 0 ? (
+        space.text.map((text) => (
+          <SpaceText
+            key={text}
+            text={text}
+            deleting={deleting === text}
+            deleteText={tryDeleteText}
+          />
+        ))
+      ) : (
+        <div className="text-center text-2xl font-bold">Empty</div>
+      )}
     </Card>
   );
 });
