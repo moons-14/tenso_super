@@ -1,4 +1,5 @@
-import { Button, Card, ImageModal } from "@/components/Elements";
+import { Button, Card, ImageModal, Spinner } from "@/components/Elements";
+import {} from "@/components/Elements/Spinner";
 import { fileURLStates } from "@/state/space";
 import { ArchiveIcon, TrashIcon } from "@heroicons/react/outline";
 import { Suspense, useState } from "react";
@@ -41,7 +42,7 @@ const FileCard: React.FC<{
     <Card className="flex h-56 flex-col p-2" shadow="sm">
       <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
         {isImage ? (
-          <Suspense>
+          <Suspense fallback={<Spinner />}>
             <FileImage path={file.path} />
           </Suspense>
         ) : (
@@ -55,7 +56,13 @@ const FileCard: React.FC<{
 
       <div className="flex-1" />
       <div className="z-10 flex gap-2">
-        <Suspense>
+        <Suspense
+          fallback={
+            <Button size="sm" variant="warn">
+              Loading...
+            </Button>
+          }
+        >
           <FileDownloadButton path={file.path} />
         </Suspense>
         <Button

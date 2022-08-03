@@ -1,3 +1,4 @@
+import { Spinner } from "@/components/Elements";
 import { themeState } from "@/state/theme";
 import { useRecoilValue } from "recoil";
 
@@ -20,7 +21,7 @@ export const LoadingFallBack = () => {
       className="bg-base-200 flex min-h-screen items-center justify-center"
       data-theme={theme}
     >
-      <div>Loading....</div>
+      <Spinner />
     </div>
   );
 };

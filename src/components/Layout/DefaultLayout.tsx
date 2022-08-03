@@ -1,6 +1,8 @@
 import { themeState } from "@/state/theme";
+import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import { Spinner } from "../Elements";
 
 export const DefaultLayout = () => {
   const theme = useRecoilValue(themeState);
@@ -9,7 +11,9 @@ export const DefaultLayout = () => {
       className="bg-base-200 text-base-content min-h-screen"
       data-theme={theme}
     >
-      <Outlet />
+      <Suspense fallback={<Spinner />}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

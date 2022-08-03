@@ -1,5 +1,6 @@
-import { Button } from "@/components/Elements";
+import { Button, Spinner } from "@/components/Elements";
 import { ChevronLeftIcon } from "@heroicons/react/outline";
+import { Suspense } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useSpaceId } from "../hooks";
 
@@ -26,9 +27,11 @@ export const SpaceLayout = () => {
   return (
     <>
       <Header />
-      <div className="container mx-auto max-w-xl px-2 pt-24">
-        <Outlet />
-      </div>
+      <Suspense fallback={<Spinner />}>
+        <div className="container mx-auto max-w-xl px-2 pt-24">
+          <Outlet />
+        </div>
+      </Suspense>
     </>
   );
 };

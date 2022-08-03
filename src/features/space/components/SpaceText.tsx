@@ -68,7 +68,9 @@ export const SpaceTextList = memo(() => {
           />
         ))
       ) : (
-        <div className="text-center text-2xl font-bold">Empty</div>
+        <div className="text-center text-2xl font-bold opacity-50">
+          Text Empty
+        </div>
       )}
     </Card>
   );
