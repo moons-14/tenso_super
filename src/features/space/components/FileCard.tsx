@@ -1,13 +1,23 @@
-import { Button, Card } from "@/components/Elements";
+import { Button, Card, ImageModal } from "@/components/Elements";
 import { fileURLStates } from "@/state/space";
 import { ArchiveIcon } from "@heroicons/react/outline";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useSpace, useSpaceId } from "../hooks";
 
 const FileImage: React.FC<{ path: string }> = ({ path }) => {
   const imageURL = useRecoilValue(fileURLStates(path));
-  return <img className="rounded-lg" src={imageURL} />;
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <ImageModal url={imageURL} open={isOpen} onChange={setIsOpen} />
+      <img
+        className="rounded-lg"
+        src={imageURL}
+        onClick={() => setIsOpen(true)}
+      />
+    </>
+  );
 };
 
 const FileCard: React.FC<{
@@ -15,9 +25,8 @@ const FileCard: React.FC<{
 }> = ({ file }) => {
   const isImage = file.type.includes("image");
   return (
-    <Card className="flex flex-col gap-1 p-2" shadow="sm">
-      <div className="text-sm font-bold">{file.name}</div>
-      <div className="flex h-40 grow items-center justify-center overflow-hidden">
+    <Card className="flex h-48 flex-col p-2" shadow="sm">
+      <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
         {isImage ? (
           <Suspense>
             <FileImage path={file.path} />
@@ -26,7 +35,9 @@ const FileCard: React.FC<{
           <ArchiveIcon className="w-3/5 opacity-50" />
         )}
       </div>
-      <Button size="sm" variant="warn">
+      <div className="z-10 text-sm font-bold">{file.name}</div>
+      <div className="flex-1" />
+      <Button size="sm" variant="warn" className="z-10">
         Download
       </Button>
     </Card>
