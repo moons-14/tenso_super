@@ -2,5 +2,5 @@ import { useLocation } from "react-router-dom";
 
 export const useSpaceId = () => {
   const { pathname } = useLocation();
-  return pathname.split("/").slice(-1)[0];
+  return decodeURI(pathname.split("/").slice(-1)[0]);
 };
