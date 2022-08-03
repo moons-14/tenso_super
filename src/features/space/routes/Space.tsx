@@ -34,6 +34,8 @@ export const Space = () => {
           Submit
         </Button>
       </form>
+
+      <SpaceTextList />
       <div className="card border-base-content relative flex h-24 w-full items-center justify-center border-4 border-dashed">
         <Button shadow="none">Drop file or click to choose file</Button>
         <input
@@ -43,7 +45,6 @@ export const Space = () => {
           onChange={(e) => void handleFiles(e)}
         />
       </div>
-      <SpaceTextList />
       <FileCardList />
     </div>
   );
