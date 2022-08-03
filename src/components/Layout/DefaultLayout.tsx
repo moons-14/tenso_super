@@ -11,7 +11,13 @@ export const DefaultLayout = () => {
       className="bg-base-200 text-base-content min-h-screen"
       data-theme={theme}
     >
-      <Suspense fallback={<Spinner />}>
+      <Suspense
+        fallback={
+          <div className="flex h-full items-center justify-center">
+            <Spinner />
+          </div>
+        }
+      >
         <Outlet />
       </Suspense>
     </div>
