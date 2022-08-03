@@ -25,7 +25,7 @@ export const Button: React.FC<Partial<ButtonProps>> = ({
   return (
     <button
       className={clsx(
-        "border-base-content border-2 font-bold active:shadow-none",
+        "border-base-content border-2 font-bold transition-all active:shadow-none",
         buttonSizes[size],
         variants[variant],
         shadows[shadow],

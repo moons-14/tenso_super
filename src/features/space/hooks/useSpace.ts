@@ -1,7 +1,7 @@
 import { spaceStates } from "@/state/space";
 import { useCallback } from "react";
 import { useRecoilState } from "recoil";
-import { uploadFile } from "../lib";
+import { deleteFile, uploadFile } from "../lib";
 
 export const useSpace = (spaceId: string) => {
   const [space, setSpace] = useRecoilState(spaceStates(spaceId));
@@ -44,5 +44,17 @@ export const useSpace = (spaceId: string) => {
     [space, setSpace, spaceId]
   );
 
-  return { space, setSpace, addText, addFiles, deleteText };
+  const removeFile = useCallback(
+    (removePath: string) => {
+      void deleteFile(removePath).then(() =>
+        setSpace({
+          ...space,
+          files: space.files.filter(({ path }) => removePath !== path),
+        })
+      );
+    },
+    [space, setSpace]
+  );
+
+  return { space, setSpace, addText, addFiles, deleteText, removeFile };
 };
