@@ -25,7 +25,7 @@ const Menu: React.FC<{
       leaveFrom="translate-x-0 rounded-none"
       leaveTo="translate-x-full rounded-bl-full rounded-tl-full"
     >
-      <Card className="bg-base-300 grid w-full grid-cols-2 gap-2 overflow-y-auto p-4 transition-all">
+      <Card className="bg-base-300 grid w-full max-w-lg grid-cols-2 gap-2 overflow-y-auto p-4 transition-all">
         <div className="sticky top-0 text-3xl font-bold">Theme</div>
         {themeList.map((theme) => (
           <div
