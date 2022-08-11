@@ -1,6 +1,6 @@
 export const variants = {
   normal: "bg-base-100 text-base-content",
-  primary: "bg-primary text-primary-content",
+  primary: "bg-primary text-primary-content shadow-black",
   secondary: "bg-secondary text-secondary-content",
   info: "bg-info text-info-content",
   warn: "bg-warning text-warning-content",

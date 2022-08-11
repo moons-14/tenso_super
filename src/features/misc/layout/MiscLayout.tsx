@@ -17,7 +17,7 @@ const Menu: React.FC<{
     <Transition
       show={open}
       as="div"
-      className="bg-primary text-primary-content fixed inset-0 z-10 flex flex-col px-4 py-24 transition-all"
+      className="bg-primary text-primary-content fixed inset-0 z-10 flex flex-col overflow-hidden px-4 py-24 transition-all"
       enter="transition-all duration-150 "
       enterFrom="translate-x-full rounded-bl-full rounded-tl-full"
       enterTo="translate-x-0 rounded-none"

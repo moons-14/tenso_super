@@ -1,8 +1,10 @@
+export type File = {
+  name: string;
+  path: string;
+  type: string;
+};
+
 export type Space = {
-  files: {
-    name: string;
-    path: string;
-    type: string;
-  }[];
+  files: File[];
   text: string[];
 };

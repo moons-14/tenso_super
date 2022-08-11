@@ -1,6 +1,7 @@
 import { Button } from "@/components/Elements";
 import { ChevronLeftIcon } from "@heroicons/react/outline";
 import { Link, Outlet } from "react-router-dom";
+import { DownloadAllButton } from "../components";
 import { useSpaceId } from "../hooks";
 
 const Header = () => {
@@ -29,6 +30,12 @@ export const SpaceLayout = () => {
 
       <div className="container mx-auto max-w-xl px-2 pt-24">
         <Outlet />
+      </div>
+
+      <div className="fixed bottom-0 z-20 flex w-full justify-center">
+        <div className="flex w-full max-w-screen-lg justify-start p-4">
+          <DownloadAllButton />
+        </div>
       </div>
     </>
   );
