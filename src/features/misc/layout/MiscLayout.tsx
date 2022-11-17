@@ -53,7 +53,7 @@ const Menu: React.FC<{
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <header className="fixed top-0 w-full">
+    <header className="bg-base-200 fixed top-0 w-full border-b-2">
       <nav className="navbar mx-auto max-w-screen-lg justify-between gap-4 sm:px-4">
         <Link to="/" className="btn btn-ghost text-2xl normal-case">
           すーぱー転送君
