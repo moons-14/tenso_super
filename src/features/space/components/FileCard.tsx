@@ -6,6 +6,7 @@ import { Suspense, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useSpace, useSpaceId } from "../hooks";
 import styles from "./../../../styles/fileCard.module.css";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const FileImage: React.FC<{ path: string }> = ({ path }) => {
   const imageURL = useRecoilValue(fileURLStates(path));
@@ -13,9 +14,10 @@ const FileImage: React.FC<{ path: string }> = ({ path }) => {
   return (
     <>
       <ImageModal url={imageURL} open={isOpen} onChange={setIsOpen} />
-      <img
+      <LazyLoadImage
         src={imageURL}
         onClick={() => setIsOpen(true)}
+        effect="opacity"
       />
     </>
   );
