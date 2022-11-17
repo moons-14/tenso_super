@@ -1,10 +1,11 @@
-import { Button, Card, ImageModal, Spinner } from "@/components/Elements";
-import {} from "@/components/Elements/Spinner";
+import { Button, ImageModal, Spinner } from "@/components/Elements";
+import { } from "@/components/Elements/Spinner";
 import { fileURLStates } from "@/state/space";
-import { ArchiveIcon, TrashIcon } from "@heroicons/react/outline";
+import { ArchiveIcon } from "@heroicons/react/outline";
 import { Suspense, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useSpace, useSpaceId } from "../hooks";
+import styles from "./../../../styles/fileCard.module.css";
 
 const FileImage: React.FC<{ path: string }> = ({ path }) => {
   const imageURL = useRecoilValue(fileURLStates(path));
@@ -13,7 +14,6 @@ const FileImage: React.FC<{ path: string }> = ({ path }) => {
     <>
       <ImageModal url={imageURL} open={isOpen} onChange={setIsOpen} />
       <img
-        className="rounded-lg"
         src={imageURL}
         onClick={() => setIsOpen(true)}
       />
@@ -39,40 +39,15 @@ const FileCard: React.FC<{
 }> = ({ file, deleting, deletePath }) => {
   const isImage = file.type.includes("image");
   return (
-    <Card className="flex h-56 flex-col p-2" shadow="sm">
-      <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-        {isImage ? (
-          <Suspense fallback={<Spinner />}>
-            <FileImage path={file.path} />
-          </Suspense>
-        ) : (
-          <ArchiveIcon className="w-3/5 opacity-50" />
-        )}
-      </div>
-
-      <div className="z-10 flex-1 overflow-hidden text-sm font-bold">
-        {file.name}
-      </div>
-
-      <div className="flex-1" />
-      <div className="z-10 flex gap-2">
-        <Suspense
-          fallback={
-            <Button size="sm" variant="warn">
-              Loading...
-            </Button>
-          }
-        >
-          <FileDownloadButton path={file.path} />
+    <div className={styles.squareImage}>
+      {isImage ? (
+        <Suspense fallback={<Spinner />}>
+          <FileImage path={file.path} />
         </Suspense>
-        <Button
-          variant={deleting ? "error" : "normal"}
-          onClick={() => deletePath && deletePath(file.path)}
-        >
-          <TrashIcon className="w-4" />
-        </Button>
-      </div>
-    </Card>
+      ) : (
+        <ArchiveIcon className="w-3/5 opacity-50" />
+      )}
+    </div>
   );
 };
 
@@ -86,12 +61,12 @@ export const FileCardList = () => {
     removeFile(path);
   };
   return (
-    <div className="grid w-full grid-cols-2 gap-6 sm:grid-cols-3">
-      {space.files.map((file, i) => (
+    <div className="grid w-full grid-cols-2">
+      {space.files.map((_, i, a) => (
         <FileCard
-          key={`${file.path}_${i}`}
-          file={file}
-          deleting={deleting === file.path}
+          key={`${a[a.length - 1 - i].path}_${i}`}
+          file={a[a.length - 1 - i]}
+          deleting={deleting === a[a.length - 1 - i].path}
           deletePath={tryDelete}
         />
       ))}
