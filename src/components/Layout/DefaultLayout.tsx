@@ -25,34 +25,35 @@ export const DefaultLayout = () => {
       </div>
       <footer className="footer footer-center bg-base-200 text-base-content rounded p-10">
         <div className="grid grid-flow-col gap-4">
-          <a className="link link-hover" href="https://www.as-faucet.xyz/">
+          <a className="link link-hover" href="https://www.as-faucet.xyz/" target="_blank" rel="noreferrer">
             CFaucet
           </a>
-          <a className="link link-hover" href="https://zenn.dev/inaridiy">
+          <a className="link link-hover" href="https://zenn.dev/inaridiy" target="_blank" rel="noreferrer">
             Blog
           </a>
           <a
             className="link link-hover"
             href="https://profile.codersrank.io/user/inaridiy/"
+            target="_blank" rel="noreferrer"
           >
             CoderRank
           </a>
         </div>
         <div>
           <div className="grid grid-flow-col gap-4">
-            <a href="https://twitter.com/unknown_gakusei">
+            <a href="https://twitter.com/inaridiy" target="_blank" rel="noreferrer">
               <SiTwitter className="h-6 w-6" />
             </a>
-            <a href="https://github.com/inaridiy">
+            <a href="https://github.com/inaridiy" target="_blank" rel="noreferrer">
               <SiGithub className="h-6 w-6" />
             </a>
-            <a href="https://www.nicovideo.jp/user/89789738">
+            <a href="https://www.nicovideo.jp/user/89789738" target="_blank" rel="noreferrer">
               <SiNiconico className="h-6 w-6" />
             </a>
           </div>
         </div>
         <div>
-          <p>Copyright © 2022 - All right reserved by Inaridiy</p>
+          <p>Copyright &copy; 2022 Inaridiy</p>
         </div>
       </footer>
     </div>
