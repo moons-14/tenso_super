@@ -1,7 +1,7 @@
 import { storage } from "@/libs/firebase";
 import { array, object, string } from "@recoiljs/refine";
 import { getDownloadURL, ref } from "firebase/storage";
-import { atomFamily } from "recoil";
+import { atom, atomFamily } from "recoil";
 import { syncEffect } from "recoil-sync";
 import { Space } from "./types";
 
@@ -29,4 +29,9 @@ export const spaceStates = atomFamily<Space, string>({
       write: ({ write }, newValue) => write(spaceId, newValue),
     }),
   ],
+});
+
+export const isShowImageDetails = atom({
+  key: "isShowImageDetails",
+  default: false,
 });
