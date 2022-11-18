@@ -6,7 +6,7 @@ export const SpaceLayout = () => {
   const spaceId = useSpaceId();
   return (
     <>
-      <Header name={spaceId} leftIcon={<ChevronLeftIcon className="m-1 h-7 w-7" />}  />
+      <Header name={spaceId} leftIcon={<ChevronLeftIcon className="m-1 h-7 w-7" />} leftIconLink="/" />
 
       <div className="container mx-auto max-w-xl px-2 pt-24">
         <Outlet />

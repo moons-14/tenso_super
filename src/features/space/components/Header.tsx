@@ -1,15 +1,17 @@
 import { ReactNode } from "react";
+import { Link } from "react-router-dom";
 
-export const Header: React.FC<{ name: string, onClick?: (e?: any) => void, onLeftIconClick?: (e?: any) => void, leftIcon: ReactNode }> = ({ name, onClick = () => { return void 0 }, onLeftIconClick = () => { return void 0 }, leftIcon }) => {
+export const Header: React.FC<{ name: string, onClick?: (e?: any) => void, onLeftIconClick?: (e?: any) => void, leftIcon: ReactNode, leftIconLink?: string }> = ({ name, onClick = () => { return void 0 }, onLeftIconClick = () => { return void 0 }, leftIcon, leftIconLink }) => {
   return (
     <header className="bg-base-200 fixed top-0 left-0 z-20 flex h-20 w-full items-end border-b-2 p-4" onClick={onClick}>
       <div className="flex w-full items-center">
         <div className="mx-1.5 h-9 w-9 rounded-full bg-gray-300" onClick={onLeftIconClick}>
           {
-            leftIcon ?
-              <>{leftIcon}</>
-              :
-              <></>
+            leftIcon && leftIconLink ?
+              <><Link to={leftIconLink}>{leftIcon}</Link></>
+              : leftIcon ?
+                <>{leftIcon}</>
+                : <></>
           }
         </div>
         <div
