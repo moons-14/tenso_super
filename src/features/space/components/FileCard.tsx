@@ -3,21 +3,22 @@ import { } from "@/components/Elements/Spinner";
 import { fileURLStates } from "@/state/space";
 import { ArchiveIcon } from "@heroicons/react/outline";
 import { Suspense, useState } from "react";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useRecoilValue } from "recoil";
 import { useSpace, useSpaceId } from "../hooks";
 import styles from "./../../../styles/fileCard.module.css";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-const FileImage: React.FC<{ path: string }> = ({ path }) => {
+const FileImage: React.FC<{ path: string; name: string }> = ({ path, name }) => {
   const imageURL = useRecoilValue(fileURLStates(path));
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <ImageModal url={imageURL} open={isOpen} onChange={setIsOpen} />
+      <ImageModal url={imageURL} open={isOpen} name={name} onChange={setIsOpen} />
       <LazyLoadImage
         src={imageURL}
         onClick={() => setIsOpen(true)}
         effect="opacity"
+        className={styles.squareImages}
       />
     </>
   );
@@ -44,7 +45,7 @@ const FileCard: React.FC<{
     <div className={styles.squareImage}>
       {isImage ? (
         <Suspense fallback={<Spinner />}>
-          <FileImage path={file.path} />
+          <FileImage path={file.path} name={file.name} />
         </Suspense>
       ) : (
         <ArchiveIcon className="w-3/5 opacity-50" />

@@ -1,32 +1,12 @@
-import { Button } from "@/components/Elements";
-import { ChevronLeftIcon } from "@heroicons/react/outline";
-import { Link, Outlet } from "react-router-dom";
-import { DownloadAllButton } from "../components";
+import { Outlet } from "react-router-dom";
+import { DownloadAllButton, Header } from "../components";
 import { useSpaceId } from "../hooks";
 
-const Header = () => {
+export const SpaceLayout = () => {
   const spaceId = useSpaceId();
   return (
-    <header className="bg-base-200 fixed top-0 z-20 w-full border-b-2">
-      <nav className="navbar mx-auto max-w-screen-lg justify-between gap-4 sm:px-4">
-        <Link to="/" className="flex-1">
-          <Button size="sm" rounded="md">
-            <ChevronLeftIcon className="w-8" />
-          </Button>
-        </Link>
-        <div className="flex-1 justify-center">
-          <h1 className="text-3xl font-bold">{spaceId}</h1>
-        </div>
-        <div className="flex-1" />
-      </nav>
-    </header>
-  );
-};
-
-export const SpaceLayout = () => {
-  return (
     <>
-      <Header />
+      <Header name={spaceId} fontSize="3xl" />
 
       <div className="container mx-auto max-w-xl px-2 pt-24">
         <Outlet />

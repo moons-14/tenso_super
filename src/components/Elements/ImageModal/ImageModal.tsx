@@ -1,10 +1,13 @@
+import { Header } from "../../../features/space/components";
+
 import clsx from "clsx";
 
 export const ImageModal: React.FC<{
   url: string;
+  name: string;
   open: boolean;
   onChange: (isOpen: boolean) => void;
-}> = ({ url, open, onChange }) => {
+}> = ({ url, open, name, onChange }) => {
   const handleImageClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
@@ -13,10 +16,11 @@ export const ImageModal: React.FC<{
   };
   return (
     <div
-      className={clsx("modal", open && "modal-open")}
+      className={clsx("modal h-full w-full", open && "modal-open", "z-40 block justify-start")}
       onClick={handleOutsideClick}
     >
-      <img src={url} className="modal-box p-0" onClick={handleImageClick} />
+      <Header name={name} fontSize="2xl" />
+      <img src={url} className="h-[50%] max-w-full object-contain" onClick={handleImageClick} />
     </div>
   );
 };
