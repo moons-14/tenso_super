@@ -1,8 +1,10 @@
 import { Header } from "../../../features/space/components";
 
 
-import { XIcon } from "@heroicons/react/outline";
+import { isShowImageDetails } from "@/state/space/atom";
+import { PlusIcon, XIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
+import { useRecoilState } from "recoil";
 
 export const ImageModal: React.FC<{
   url: string;
@@ -10,6 +12,7 @@ export const ImageModal: React.FC<{
   open: boolean;
   onChange: (isOpen: boolean) => void;
 }> = ({ url, open, name, onChange }) => {
+  const [isShowDetails, setIsShowDetails] = useRecoilState(isShowImageDetails);
   const handleImageClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
@@ -23,9 +26,29 @@ export const ImageModal: React.FC<{
     >
       <Header name={name} onClick={handleImageClick} onLeftIconClick={handleOutsideClick} leftIcon={<XIcon className="m-1 h-7 w-7" />} />
       <div className="bg-base-300 h-full w-full pt-20" onClick={handleImageClick}>
-        <img src={url} className="mx-auto my-0.5 max-h-[50%] max-w-full object-contain text-center" onClick={handleImageClick} />
-        <div className="border-base-content border-t-1">aaaa</div>
+        {
+          isShowDetails ?
+            <>
+              <img src={url} className="mx-auto my-0.5 max-h-[50%] max-w-full object-contain text-center" onClick={handleImageClick} />
+              <div className="border-base-content border-t-1">
+                <div className="bg-base-100 flex h-12">
+                  <div className="ml-2 flex-1 py-2 text-xl">ファイルの詳細</div>
+                  <div className="py-2 px-3" onClick={() => { setIsShowDetails(!isShowDetails) }}><XIcon className="h-8 w-8" /></div>
+                </div>
+              </div>
+            </>
+            : <>
+              <img src={url} className="mx-auto my-0.5 h-full w-full object-contain text-center" onClick={handleImageClick} />
+            </>
+        }
       </div>
+      {
+        isShowDetails ?
+          <></>
+          : <>
+            <div className="bg-info fixed bottom-8 right-8 rounded-full" onClick={(e) => { handleImageClick(e); setIsShowDetails(!isShowDetails) }}><PlusIcon className="m-2 h-10 w-10" /></div>
+          </>
+      }
     </div>
   );
 };
