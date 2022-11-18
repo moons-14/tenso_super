@@ -31,7 +31,7 @@ export const spaceStates = atomFamily<Space, string>({
   ],
 });
 
-export const isShowImageDetails = atom<boolean>({
+export const isShowImageDetails = atom<null | "basic" | "ai" | "share">({
   key: "isShowImageDetails",
-  default: false,
+  default: null,
 });
