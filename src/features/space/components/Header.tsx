@@ -1,22 +1,24 @@
-import { Button } from "@/components/Elements";
-import { ChevronLeftIcon } from "@heroicons/react/outline";
-import clsx from "clsx";
-import { Link } from "react-router-dom";
+import { ReactNode } from "react";
 
-export const Header: React.FC<{ name: string, fontSize?: "3xl" | "2xl" }> = ({ name, fontSize = "2xl" }) => {
+export const Header: React.FC<{ name: string, onClick?: (e?: any) => void, onLeftIconClick?: (e?: any) => void, leftIcon: ReactNode }> = ({ name, onClick = () => { return void 0 }, onLeftIconClick = () => { return void 0 }, leftIcon }) => {
   return (
-    <header className="bg-base-200 fixed top-0 z-20 w-full border-b-2">
-      <nav className="navbar mx-auto max-w-screen-lg justify-between gap-4 sm:px-4">
-        <Link to="/" className="flex-1">
-          <Button size="sm" rounded="md">
-            <ChevronLeftIcon className="w-8" />
-          </Button>
-        </Link>
-        <div className="flex-1 justify-center">
-          <h1 className={clsx(fontSize == "3xl" ? "text-3xl" : fontSize == "2xl" ? "2xl" : "")}>{name}</h1>
+    <header className="bg-base-200 fixed top-0 left-0 z-20 flex h-20 w-full items-end border-b-2 p-4" onClick={onClick}>
+      <div className="flex w-full items-center">
+        <div className="mx-1.5 h-9 w-9 rounded-full bg-gray-300" onClick={onLeftIconClick}>
+          {
+            leftIcon ?
+              <>{leftIcon}</>
+              :
+              <></>
+          }
         </div>
-        <div className="flex-1" />
-      </nav>
+        <div
+          className="ml-1.5 mr-6 flex-1 select-none overflow-y-hidden overflow-x-scroll whitespace-nowrap py-0.5 text-center text-2xl"
+        >
+          {name}
+        </div>
+        <div className="mx-1.5 w-9"></div>
+      </div>
     </header>
   );
 };
