@@ -2,7 +2,8 @@ import { Spinner } from "@/components/Elements";
 import { themeState } from "@/state/theme";
 import { useRecoilValue } from "recoil";
 
-export const ErrorFallBack = () => {
+export const ErrorFallBack = (e: any) => {
+  console.log(e)
   const theme = useRecoilValue(themeState);
   return (
     <div

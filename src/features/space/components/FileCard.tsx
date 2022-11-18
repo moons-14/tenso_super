@@ -1,22 +1,22 @@
 import { Button, ImageModal, Spinner } from "@/components/Elements";
 import { } from "@/components/Elements/Spinner";
-import { fileURLStates } from "@/state/space";
+import { fileURLStates, modalImgData, modalOpen } from "@/state/space";
 import { ArchiveIcon } from "@heroicons/react/outline";
 import { Suspense, useState } from "react";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useSpace, useSpaceId } from "../hooks";
 import styles from "./../../../styles/fileCard.module.css";
 
-const FileImage: React.FC<{ path: string; name: string }> = ({ path, name }) => {
+const FileImage: React.FC<{ path: string; name: string; type: string }> = ({ path, name, type }) => {
   const imageURL = useRecoilValue(fileURLStates(path));
-  const [isOpen, setIsOpen] = useState(false);
+  const [modalData, setModalData] = useRecoilState(modalImgData);
+  const [isOpen, setIsOpen] = useRecoilState(modalOpen);
   return (
     <>
-      <ImageModal url={imageURL} open={isOpen} name={name} onChange={setIsOpen} />
       <LazyLoadImage
         src={imageURL}
-        onClick={() => setIsOpen(true)}
+        onClick={() => { setModalData({ path: path, name: name, type: type }); setIsOpen(true); }}
         effect="opacity"
         className={styles.squareImages}
       />
@@ -45,7 +45,7 @@ const FileCard: React.FC<{
     <div className={styles.squareImage}>
       {isImage ? (
         <Suspense fallback={<Spinner />}>
-          <FileImage path={file.path} name={file.name} />
+          <FileImage path={file.path} name={file.name} type={file.type} />
         </Suspense>
       ) : (
         <ArchiveIcon className="w-3/5 opacity-50" />
@@ -63,16 +63,26 @@ export const FileCardList = () => {
     setDeleting("");
     removeFile(path);
   };
+
+  const modalData = useRecoilValue(modalImgData);
+  const [isOpen, setIsOpen] = useRecoilState(modalOpen);
   return (
-    <div className="grid w-full grid-cols-2">
-      {space.files.map((_, i, a) => (
-        <FileCard
-          key={`${a[a.length - 1 - i].path}_${i}`}
-          file={a[a.length - 1 - i]}
-          deleting={deleting === a[a.length - 1 - i].path}
-          deletePath={tryDelete}
-        />
-      ))}
-    </div>
+    <>
+      <div className="grid w-full grid-cols-2">
+        {space.files.map((_, i, a) => (
+          <FileCard
+            key={`${a[a.length - 1 - i].path}_${i}`}
+            file={a[a.length - 1 - i]}
+            deleting={deleting === a[a.length - 1 - i].path}
+            deletePath={tryDelete}
+          />
+        ))}
+      </div>
+      {
+        modalData ?
+          <ImageModal url={modalData.path} open={isOpen} name={modalData.name} onChange={setIsOpen} />
+          : <></>
+      }
+    </>
   );
 };

@@ -31,7 +31,21 @@ export const spaceStates = atomFamily<Space, string>({
   ],
 });
 
-export const isShowImageDetails = atom<null | "basic" | "ai" | "share">({
+export const isShowImageDetails = atom<null | "basic" | "ai">({
   key: "isShowImageDetails",
   default: null,
+});
+
+export const modalImgData = atom<{
+  name: string;
+  path: string;
+  type: string;
+} | null>({
+  key: "modalImgData",
+  default: null,
+});
+
+export const modalOpen = atom<boolean>({
+  key: "modalOpen",
+  default: false,
 });
