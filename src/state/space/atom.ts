@@ -31,7 +31,7 @@ export const spaceStates = atomFamily<Space, string>({
   ],
 });
 
-export const isShowImageDetails = atom<null | "basic" | "ai">({
+export const isShowImageDetails = atom<null | "basic" | "ai" | "exif">({
   key: "isShowImageDetails",
   default: null,
 });

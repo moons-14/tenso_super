@@ -25,20 +25,36 @@ export const ImageModal: React.FC<{
     onChange(false);
   };
   const imageURL = useRecoilValue(fileURLStates(url));
-  const [detail, setDetail] = useState({ basic: {}, ai: { parameters: null } });
+  const [detail, setDetail] = useState<{ basic: any, ai: { parameters: string | null }, exif: any | null }>({ basic: {}, ai: { parameters: null }, exif: null });
   useEffect(() => {
     exifr.parse(imageURL).then(exif => {
-      setDetail({
-        basic: {
-          fileName: name,
-          fileUrl: url
-        }, ai: {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          parameters: exif.parameters ? exif.parameters : null
-        }
-      })
+      if (exif) {
+        setDetail({
+          basic: {
+            fileName: name,
+            fileUrl: url
+          }, ai: {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+            parameters: exif.parameters ? exif.parameters : ""
+          },
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          exif: exif
+        })
+      } else {
+        setDetail({
+          basic: {
+            fileName: name,
+            fileUrl: url
+          }, ai: {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+            parameters: ""
+          },
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          exif: {}
+        })
+      }
     }).catch(() => { void 0 })
-  }, [open])
+  }, [url])
   return (
     <div
       className={clsx("modal h-full w-full", open && "modal-open", "z-40 block justify-start")}
@@ -50,7 +66,7 @@ export const ImageModal: React.FC<{
           isShowDetails != null ?
             <>
               <img src={imageURL} className="mx-auto my-0.5 max-h-[50%] max-w-full object-contain text-center" id="imgPreview" onClick={handleImageClick} />
-              <div className="border-base-content border-t-1">
+              <div className="border-base-content border-t-1 h-full">
                 <div className="bg-base-100 flex h-12">
                   <div className="ml-2 flex-1 py-2 text-xl">ファイルの詳細</div>
                   <div className="py-2 px-3" onClick={() => { setIsShowDetails(null) }}><XIcon className="h-8 w-8" /></div>
@@ -58,8 +74,9 @@ export const ImageModal: React.FC<{
                 <div className="tabs tabs-boxed w-full">
                   <a className={clsx("tab w-1/3", isShowDetails == "basic" ? "tab-active" : "")} onClick={() => { setIsShowDetails("basic") }}>基本</a>
                   <a className={clsx("tab w-1/3", isShowDetails == "ai" ? "tab-active" : "")} onClick={() => { setIsShowDetails("ai") }}>AI</a>
+                  <a className={clsx("tab w-1/3", isShowDetails == "exif" ? "tab-active" : "")} onClick={() => { setIsShowDetails("exif") }}>Exif</a>
                 </div>
-                <div className="max-h-[20vh] overflow-scroll break-all py-2">
+                <div className="h-[35%] overflow-scroll break-all py-2">
                   {
                     isShowDetails == "basic" ?
                       <div className="flex">
@@ -72,7 +89,17 @@ export const ImageModal: React.FC<{
                       </div>
                       : isShowDetails == "ai" ?
                         detail.ai.parameters ? <CopyToClipboard text={detail.ai.parameters} onCopy={() => { toast("コピーしました!") }}><span>{detail.ai.parameters}</span></CopyToClipboard> : <></>
-                        : <></>
+                        : isShowDetails == "exif" ?
+                          <>
+                            {
+                              detail.exif ?
+                                Object.keys(detail.exif).map((i) => {
+                                  return (<div key={i} className="overflow-x-scroll whitespace-nowrap">{i}:<CopyToClipboard text={detail.exif[i]} onCopy={() => { toast("コピーしました!") }}><span>{detail.exif[i]}</span></CopyToClipboard><br></br></div>)
+                                })
+                                : <></>
+                            }
+                          </>
+                          : <></>
                   }
                 </div>
               </div>
